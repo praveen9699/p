@@ -1,0 +1,84 @@
+    <form [formGroup]="profiles"  class="container">
+        <label for="name"> Name: </label><br>
+        <input id="name" type="text" formControlName="Name"><br>
+        <div *ngIf="profiles.get('Name')!.invalid && profiles.get('Name')!.touched">
+            <small class="text danger"      *ngIf="profiles.get('Name')!.errors?.['required']">name is required</small>
+            <small class="text danger"   *ngIf="profiles.get('Name')!.errors?.['minlength']">name must be in 4 latters</small>
+        </div>
+        <div>
+            <label>Mail:</label><br>
+            <input type="text" formControlName="Mail" >
+                <div *ngIf="profiles.get('Mail')!.invalid && profiles.get('Mail')!.touched">
+                    <small class="text danger"  *ngIf="profiles.get('Mail')!.errors?.['required']">Mail is required</small>
+                    <small class="text danger" *ngIf="profiles.get('Mail')!.errors?.['minlength']">mail must be in 12 latters</small>
+                </div>
+         </div>
+         <div>
+            <label>phoneNumber:</label><br>
+            <input type="number" formControlName="PhoneNumber">
+            <div *ngIf="profiles.get('phoneNumber')!.invalid && profiles.get('PhoneNumber')!.touched">
+                <small class="text danger" *ngIf="profiles.get('PhoneNumber')!.errors?.['required']">PhoneNumber is required</small>
+                <small class="text danger" *ngIf="profiles.get('PhoneNumber')!.errors?.['minlength']">PhoneNumber must be in 10 latters</small>
+            </div>
+        </div>
+        <div>
+            <label>password:</label><br>
+            <input type="password" formControlName="password">
+            <div *ngIf="profiles.get('password')!.invalid && profiles.get('password')!.touched">
+                <small class="text danger" *ngIf="profiles.get('password')!.errors?.['required']">password is required</small>
+                <small class="text danger" *ngIf="profiles.get('password')!.errors?.['minlength']">password must be in 8 latters</small>
+            
+            </div>
+        </div>
+        <div>
+            <label>conform Password:</label><br>
+            <input type="Conformpassword" formControlName="Conformpassword" (keyup)="changepassword($event)">
+            <div *ngIf="profiles.get('Conformpassword')!.invalid && profiles.get('Conformpassword')!.touched">
+                <small class="text danger" *ngIf="profiles.get('Conformpassword')!.errors?.['required']">Conformpassword
+                     is required</small>
+              </div>
+              <small class="text danger" *ngIf="passworderror">password doesn't match</small>
+        </div><br>
+        <canvas  id="random" width="250" height="50">  </canvas>
+        <button (click)="reGenCaptcha()">@</button><br>
+        <input type="text" placeholder="captcha" formControlName="captcha" (keyup)="captchamat($event)"><br>
+            <div *ngIf="profiles.get('captcha')!.invalid && profiles.get('captcha')!.touched">
+                  <small class="text danger" *ngIf="profiles.get('captcha')!.errors?.['required']">captcha is required</small>
+            </div>
+            <small class="text danger" *ngIf="captchaerror">pls enter currect captcha</small>
+
+        <select formControlName="Dropdown">
+            <option *ngFor="let emp of employee"  value="{{emp.id}}">
+                {{emp.employee}}
+            </option>
+        </select>
+        <button (click)="register()" >submit</button>
+         <table>
+             <tr>
+                 <th *ngFor="let column of header" class="space">
+                        {{column}}
+                 </th>
+             </tr>
+             <tr *ngFor="let row of rows;let i=index">
+                 <td>
+                     {{i+1}}
+                 </td>
+                 <td>
+                     {{row.Name}}
+                 </td>
+                 <td>
+                    {{row.Mail}}
+                </td>
+                <td>
+                    {{row.PhoneNumber}}
+                </td>
+                <td>
+                    {{row.Dropdown}}
+                </td>
+             </tr>
+          
+        </table>
+</form>
+
+
+    
