@@ -1,0 +1,100 @@
+<!-- <div id="logform">
+<p>Log in form</p>
+<div class="header" *ngIf="showForm">
+    Name: <input type="text" [(ngModel)]="name"><br>
+    <span *ngIf="errmsg" >invalid name</span><br>
+    Email: <input type="text"  [(ngModel)]="mail"><br>
+    phone:<input type="text" maxlength="10" [(ngModel)]="phno"><br>
+    <span *ngIf="msg1">invalid number</span><br>
+    
+</div>
+<div class="container">
+<button (click)="function()" >save</button>
+<span *ngIf="showSuccessMessage">sucessfully created</span>
+
+<div *ngFor="let item of users">{{item.name}}</div>
+<div *ngFor="let item of users">{{item.email}}</div>
+<div *ngFor="let item of users">{{item.phno}}</div>
+</div>
+</div> -->
+<form [formGroup]="profiles" (ngSubmit)="onSubmit()" class="form">
+    <p>Log-in Form</p>
+    <label for="first-name">First Name: </label>
+    
+    <input id="first-name" type="text" formControlName="firstName"><br>
+        <div *ngIf="profiles.get('firstName')!.invalid && profiles.get('firstName')!.touched">
+            <small class="text-danger" *ngIf="profiles.get('firstName')!.errors?.['required']">name is required</small>
+            <small class="text-danger" *ngIf="profiles.get('firstName')!.errors?.['minlength']">name must be in 4 latters</small>
+            <small class="text-danger"  *ngIf="profiles.get('firstName')!.errors?.['forbiddenName']">
+                Name is already exit
+            </small>
+        </div>
+        
+    <label for="last-name">Last Name: </label>
+    <input id="last-name" type="text" formControlName="lastName"> <br>
+        <div *ngIf="profiles.get('lastName')!.invalid && profiles.get('lastName')!.touched">
+              <small class="text-danger" *ngIf="profiles.get('lastName')!.errors?.['required']">name is required</small>
+              <small class="text-danger" *ngIf="profiles.get('lastName')!.errors?.['minlength']">name must be in 4 latters</small>
+        </div>
+    
+    <label for="mail">mail:</label>
+    <input id="mail" type="text" formControlName="mail"><br>
+        <div *ngIf="profiles.get('mail')!.invalid && profiles.get('mail')!.touched">
+            <small class="text-danger" *ngIf="profiles.get('mail')!.errors?.['required']">mail is required</small>
+            <small class="text-danger" *ngIf="profiles.get('mail')!.errors?.['minlength']">mail must  be in 12 char </small>
+            <small class="text-danger" *ngIf="profiles.get('mail')!.errors?.['pattern']">mail must  be in 12 char </small>
+        </div>
+
+    <label for="phno">number:</label>
+    <input id="phno" type="number" maxlength="10" formControlName="phno"><br>
+        <div *ngIf="profiles.get('phno')!.invalid && profiles.get('phno')!.touched">
+            <small class="text-danger" *ngIf="profiles.get('phno')!.errors?.['required']">phno is required</small>
+            <small class="text-danger" *ngIf="profiles.get('phno')!.errors?.['minlength']">phno must  be in 10 char </small>
+            <!-- <small class="text-danger" *ngIf="profiles.get('phno')!.errors?.['maxlength']">phno must  be in 10 char </small> -->
+            <small class="text-danger" *ngIf="profiles.get('phno')!.errors?.['pattern']">number most be start in 9or 8or 7</small>
+        </div>
+    <button type="submit" [disabled]="!profiles.valid" class="bg"
+    (click)="createUser()">create account</button>
+        <!-- <span *ngIf="showmsg">sucessfully created</span> -->
+      
+        <hr>
+        <table>
+            <tr>
+                <th *ngFor = "let column of headers">
+                    {{column}}
+        
+                </th>
+                
+            </tr>
+            <tr *ngFor = "let row of rows;let i=index">
+           
+                <td>
+                    {{i+1}}
+                </td>
+                   <td >
+                    {{row.firstName}}
+                   </td>
+                 
+                   <td>
+                       {{row.lastName}}
+                   </td>
+                <td>
+                    {{row.mail}}
+                </td>
+                <td>
+                    {{row.phno}}
+                </td>
+                <td><button (click)=editform(row) class="ba">edit</button></td>
+                <td><button (click)="taskremove(row._id)" class="bc">delete</button></td>
+               
+        
+            </tr>
+          </table>
+          <select>
+            <option *ngFor = "let row of rows">
+                {{row.firstName}}
+            </option>
+          </select>
+         
+    </form>
+    <!-- <p>Log-in</p> -->

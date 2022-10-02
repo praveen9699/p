@@ -1,0 +1,20 @@
+.form
+{
+    margin-left: 45%;
+}
+table, th, td {
+    border: 1px solid rgb(9, 30, 128);
+  
+  }
+  .bc
+  {
+      background-color: rgb(236, 93, 93);
+  }
+  .bg
+  {
+      background-color:rgb(164, 228, 164);
+  }
+  .ba
+  {
+      background-color: blueviolet;
+  }
